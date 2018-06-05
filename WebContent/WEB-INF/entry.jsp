@@ -80,10 +80,10 @@
 				<label for="category" class="offset-2 col-sm-2 col-form-label font-weight-bold">カテゴリー <span class="badge badge-danger">必須</span></label>
 				<div class="col-4">
 					<select class="custom-select" id="category">
-						<option selected>選択して下さい</option>
-						<option>食費</option>
-						<option>日用品</option>
-						<option>交際費</option>
+						<option name="category_id" selected>選択して下さい</option>
+						<option value="">食費</option>
+						<option value="">日用品</option>
+						<option value="">交際費</option>
 					</select>
 				</div>
 			</div>
