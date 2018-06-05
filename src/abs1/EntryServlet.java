@@ -32,13 +32,13 @@ public class EntryServlet extends HttpServlet {
 
 			con = DBUtils.getConnection();
 
-			sql = "INSERT INTO abs1 (date, category_id, note, price) VALUES (?,?,?,?)";
+			sql = "INSERT INTO abs1 (date, category, note, price) VALUES (?,?,?,?)";
 
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, req.getParameter("date"));
-			ps.setString(2, req.getParameter("category_id"));
-			if(req.getParameter("date").equals("")) {
+			ps.setString(2, req.getParameter("category"));
+			if(req.getParameter("note").equals("")) {
 				ps.setString(3, null);
 			}else {
 				ps.setString(3, req.getParameter("note"));
