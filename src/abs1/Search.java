@@ -17,4 +17,5 @@ public class Search extends HttpServlet {
 		//フォワード
 		getServletContext().getRequestDispatcher("/WEB-INF/search.jsp").forward(req, resp);
 	}
+
 }

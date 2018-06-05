@@ -19,7 +19,7 @@ import utils.DBUtils;
 @WebServlet("/result.html")
 public class Result extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
 		req.setCharacterEncoding("utf-8");

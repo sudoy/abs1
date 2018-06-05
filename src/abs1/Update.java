@@ -70,7 +70,9 @@ public class Update extends HttpServlet {
 			}
 		}
 
-		//フォワード
-		getServletContext().getRequestDispatcher("/WEB-INF/update.jsp").forward(req, resp);
+		//リダイレクト
+		resp.sendRedirect("index.html");
+
+
 	}
 }
