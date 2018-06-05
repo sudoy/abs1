@@ -6,7 +6,7 @@ public class Abs1 {
 
 	private int id;
 	private Date date;
-	private int categoryId;
+	private int category;
 	private String note;
 	private int price;
 
@@ -16,7 +16,7 @@ public class Abs1 {
 		super();
 		this.id = id;
 		this.date = date;
-		this.categoryId = categoryId;
+		this.category = categoryId;
 		this.note = note;
 		this.price = price;
 	}
@@ -33,10 +33,10 @@ public class Abs1 {
 		this.date = date;
 	}
 	public int getCategoryId() {
-		return categoryId;
+		return category;
 	}
 	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+		this.category = categoryId;
 	}
 	public String getNote() {
 		return note;
