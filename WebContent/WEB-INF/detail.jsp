@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="utils.HTMLUtils"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -49,11 +54,11 @@
 
 		<hr class="mt-1">
 
-		<form action="#" method="post">
+		<form action="update.html" method="post">
 			<div class="form-group row">
 				<label for="date" class="offset-2 col-sm-2 col-form-label font-weight-bold">日付</label>
 				<div class="col-2">
-					<input type="text" class="form-control" id="date" placeholder="日付" aria-describedby="dateHelp" value="2018/05/31" readonly>
+					<input type="text" class="form-control" name="date" id="date" placeholder="日付" aria-describedby="dateHelp" value="${HTMLUtils.dateFormat(data.date)}" readonly>
 				</div>
 				<div class="col-4">
 					<small id="dateHelp" class="text-muted align-bottom">「YYYY/MM/DD」形式で入力してください。</small>
@@ -79,31 +84,34 @@
 			<div class="form-group row">
 				<label for="category" class="offset-2 col-sm-2 col-form-label font-weight-bold">カテゴリー</label>
 				<div class="col-4">
-					<select class="custom-select" id="category" disabled>
+					<select class="custom-select" name="category" id="category" disabled>
 						<option>選択して下さい</option>
-						<option selected>食費</option>
-						<option>日用品</option>
-						<option>交際費</option>
+
+						<option ${data.category eq '1' ? 'selected' : ''}>食費</option>
+						<option ${data.category eq '2' ? 'selected' : ''}>日用品</option>
+						<option ${data.category eq '3' ? 'selected' : ''}>交際費</option>
 					</select>
 				</div>
 			</div>
+
 			<div class="form-group row">
 				<label for="note" class="offset-2 col-sm-2 col-form-label font-weight-bold">備考</label>
 				<div class="col-6">
-					<textarea class="form-control" id="note" placeholder="備考" rows="3" readonly>ランチ</textarea>
+					<textarea class="form-control" name="note" id="note" placeholder="備考" rows="3" readonly>${data.note}</textarea>
 				</div>
 			</div>
+
 			<div class="form-group row">
 				<label for="amount" class="offset-2 col-sm-2 col-form-label font-weight-bold">金額</label>
 				<div class="col-2">
-					<input type="text" class="form-control" id="amount" placeholder="金額" value="800" readonly>
+					<input type="text" class="form-control" name="price" id="amount" placeholder="金額" value="${data.price}" readonly>
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<div class="offset-4 col-6">
 					<a href="index.html" class="btn btn-secondary">キャンセル</a>
-					<a href="update.html" class="btn btn-primary"><span class="oi oi-pencil"></span> 修 正</a>
+					<button type="submit" class="btn btn-primary"><span class="oi oi-pencil"></span> 修 正</button>
 				</div>
 				<div class="col-2 text-right">
 					<a href="index.html" class="btn btn-danger delete-btn"><span class="oi oi-trash"></span> 削 除</a>
