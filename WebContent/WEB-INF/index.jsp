@@ -120,7 +120,7 @@
 											操作
 										</button>
 										<div class="dropdown-menu">
-											<a class="dropdown-item" href="detail.html"><span class="oi oi-spreadsheet"></span> 詳細</a>
+											<a class="dropdown-item" href="detail.html?id=${abs1.id}"><span class="oi oi-spreadsheet"></span> 詳細</a>
 											<a class="dropdown-item" href="copy.html"><span class="oi oi-paperclip"></span> コピー</a>
 											<div class="dropdown-divider"></div>
 											<a class="dropdown-item delete-btn" href="index.html"><span class="oi oi-trash"></span> 削除</a>
