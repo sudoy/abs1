@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,21 +28,23 @@
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col">
-				<div class="alert alert-danger alert-dismissible fade show" role="alert">
-					<h4 class="alert-heading h5 font-weight-bold"><span class="oi oi-pin"></span> エラーが発生しました！</h4>
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<ul>
-						<li>日付は必須入力です。</li>
-						<li>カテゴリーは必須入力です。</li>
-						<li>金額は必須入力です。</li>
-					</ul>
+		<c:if test="${errors != null}">
+			<div class="row">
+				<div class="col">
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						<h4 class="alert-heading h5 font-weight-bold"><span class="oi oi-pin"></span> エラーが発生しました！</h4>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<ul>
+							<c:forEach var="error" items="${errors}">
+								<li>${error}</li>
+							</c:forEach>
+						</ul>
+					</div>
 				</div>
 			</div>
-		</div>
+		</c:if>
 
 		<div class="row justify-content-between">
 			<div class="offset-1 col">
@@ -53,7 +58,7 @@
 			<div class="form-group row">
 				<label for="date" class="offset-2 col-sm-2 col-form-label font-weight-bold">日付 <span class="badge badge-danger">必須</span></label>
 				<div class="col-2">
-					<input type="text" class="form-control" name="date" id="date" placeholder="日付" aria-describedby="dateHelp" value="2018/05/31">
+					<input type="text" class="form-control" name="date" id="date" placeholder="日付" aria-describedby="dateHelp" value="${param.date}">
 				</div>
 				<div class="col-4">
 					<small id="dateHelp" class="text-muted align-bottom">「YYYY/MM/DD」形式で入力してください。</small>
@@ -90,13 +95,13 @@
 			<div class="form-group row">
 				<label for="note" class="offset-2 col-sm-2 col-form-label font-weight-bold">備考</label>
 				<div class="col-6">
-					<textarea class="form-control" name="note" id="note" placeholder="備考" rows="3"></textarea>
+					<textarea class="form-control" name="note" id="note" placeholder="備考" rows="3">${param.note}</textarea>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="amount" class="offset-2 col-sm-2 col-form-label font-weight-bold">金額 <span class="badge badge-danger">必須</span></label>
 				<div class="col-2">
-					<input type="text" class="form-control" name="price" id="amount" placeholder="金額">
+					<input type="text" class="form-control" name="price" id="amount" placeholder="金額" value="${param.price}">
 				</div>
 			</div>
 
