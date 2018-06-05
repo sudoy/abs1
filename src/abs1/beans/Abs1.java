@@ -6,13 +6,13 @@ public class Abs1 {
 
 	private int id;
 	private Date date;
-	private int category;
+	private String category;
 	private String note;
 	private int price;
 
 
 
-	public Abs1(int id, Date date, int category, String note, int price) {
+	public Abs1(int id, Date date, String category, String note, int price) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -32,10 +32,10 @@ public class Abs1 {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public int getCategory() {
+	public String getCategory() {
 		return category;
 	}
-	public void setCategory(int category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 	public String getNote() {
