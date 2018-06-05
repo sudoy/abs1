@@ -12,11 +12,11 @@ public class Abs1 {
 
 
 
-	public Abs1(int id, Date date, int categoryId, String note, int price) {
+	public Abs1(int id, Date date, int category, String note, int price) {
 		super();
 		this.id = id;
 		this.date = date;
-		this.category = categoryId;
+		this.category = category;
 		this.note = note;
 		this.price = price;
 	}
@@ -32,11 +32,11 @@ public class Abs1 {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public int getCategoryId() {
+	public int getCategory() {
 		return category;
 	}
-	public void setCategoryId(int categoryId) {
-		this.category = categoryId;
+	public void setCategory(int category) {
+		this.category = category;
 	}
 	public String getNote() {
 		return note;
