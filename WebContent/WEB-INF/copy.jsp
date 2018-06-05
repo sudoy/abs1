@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@page import="utils.HTMLUtils"%>
+
+<!DOCTYPE html>
 <html>
 <head>
 	<jsp:include page="_header.jsp" />
@@ -51,11 +53,11 @@
 
 		<hr class="mt-1">
 
-		<form action="#" method="post">
+		<form action="copy.html" method="post">
 			<div class="form-group row">
 				<label for="date" class="offset-2 col-sm-2 col-form-label font-weight-bold">日付 <span class="badge badge-danger">必須</span></label>
 				<div class="col-2">
-					<input type="text" class="form-control" id="date" placeholder="日付" aria-describedby="dateHelp" value="2018/05/31">
+					<input type="text" class="form-control" name="date" id="date" placeholder="日付" aria-describedby="dateHelp" value="${HTMLUtils.dateFormat(data.date)}">
 				</div>
 				<div class="col-4">
 					<small id="dateHelp" class="text-muted align-bottom">「YYYY/MM/DD」形式で入力してください。</small>
@@ -81,24 +83,24 @@
 			<div class="form-group row">
 				<label for="category" class="offset-2 col-sm-2 col-form-label font-weight-bold">カテゴリー <span class="badge badge-danger">必須</span></label>
 				<div class="col-4">
-					<select class="custom-select" id="category">
+					<select class="custom-select" name="category" id="category">
 						<option>選択して下さい</option>
-						<option selected>食費</option>
-						<option>日用品</option>
-						<option>交際費</option>
+						<option ${data.category eq '1' ? 'selected' : ''}>食費</option>
+						<option ${data.category eq '2' ? 'selected' : ''}>日用品</option>
+						<option ${data.category eq '3' ? 'selected' : ''}>交際費</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="note" class="offset-2 col-sm-2 col-form-label font-weight-bold">備考</label>
 				<div class="col-6">
-					<textarea class="form-control" id="note" placeholder="備考" rows="3">ランチ</textarea>
+					<textarea class="form-control" name="note" id="note" placeholder="備考" rows="3">${data.note}</textarea>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="amount" class="offset-2 col-sm-2 col-form-label font-weight-bold">金額 <span class="badge badge-danger">必須</span></label>
 				<div class="col-2">
-					<input type="text" class="form-control" id="amount" placeholder="金額" value="800">
+					<input type="text" class="form-control" name="price" id="amount" placeholder="金額" value="${data.price}">
 				</div>
 			</div>
 
