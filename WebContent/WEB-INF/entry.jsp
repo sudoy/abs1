@@ -81,9 +81,9 @@
 				<div class="col-4">
 					<select class="custom-select" name="category" id="category">
 						<option value="0" selected>選択して下さい</option>
-						<option value="1">食費</option>
-						<option value="2">日用品</option>
-						<option value="3">交際費</option>
+						<option value="食費">食費</option>
+						<option value="日用品">日用品</option>
+						<option value="交際費">交際費</option>
 					</select>
 				</div>
 			</div>
