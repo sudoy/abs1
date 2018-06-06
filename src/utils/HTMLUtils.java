@@ -2,6 +2,8 @@ package utils;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class HTMLUtils {
 
@@ -14,5 +16,12 @@ public class HTMLUtils {
 		s = sdf.format(limitDate);
 
 		return s;
+	}
+
+	public static String nowDateFormat(LocalDate now) {
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年MM月");
+
+		return now.format(formatter);
 	}
 }
