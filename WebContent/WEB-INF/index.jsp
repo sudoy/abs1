@@ -31,21 +31,24 @@
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col">
-				<div class="alert alert-danger alert-dismissible fade show" role="alert">
-					<h4 class="alert-heading h5 font-weight-bold"><span class="oi oi-pin"></span> エラーが発生しました！</h4>
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<ul>
-						<li>日付は必須入力です。</li>
-						<li>カテゴリーは必須入力です。</li>
-						<li>金額は必須入力です。</li>
-					</ul>
+		<c:if test="${errors != null}">
+			<div class="row">
+				<div class="col">
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						<h4 class="alert-heading h5 font-weight-bold"><span class="oi oi-pin"></span> エラーが発生しました！</h4>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<ul>
+							<c:forEach var="error" items="${errors}">
+								<li>${error}</li>
+							</c:forEach>
+						</ul>
+					</div>
 				</div>
 			</div>
-		</div>
+		</c:if>
+		<% session.setAttribute("errors", null); %>
 
 		<div class="row pt-4">
 			<div class="col">
@@ -84,7 +87,7 @@
 				<div class="card bg-light border-info mb-4">
 					<div class="card-header text-center"><span class="oi oi-yen"></span> 今月の収入合計 <small class="text-muted">（先月比）</small></div>
 					<div class="card-body">
-						<p class="card-text text-center">${currentIncome}<small class="text-info">（+ 12,000）</small></p>
+						<p class="card-text text-center">${currentIncome}<small class="text-${HTMLUtils.color(compareIncome)}">（${compareIncome}）</small></p>
 					</div>
 				</div>
 			</div>
@@ -93,7 +96,7 @@
 				<div class="card bg-light border-dark mb-4">
 					<div class="card-header text-center"><span class="oi oi-yen"></span> 今月の支出合計 <small class="text-muted">（先月比）</small></div>
 					<div class="card-body">
-						<p class="card-text text-center">${currentSpend}<small class="text-danger">（- 12,000）</small></p>
+						<p class="card-text text-center">${currentSpend}<small class="text-${HTMLUtils.color(compareSpend)}">（${compareSpend}）</small></p>
 					</div>
 				</div>
 			</div>

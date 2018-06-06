@@ -24,4 +24,13 @@ public class HTMLUtils {
 
 		return now.format(formatter);
 	}
+	public static String color(int price) {
+		String s = "";
+		if(price >= 0) {
+			s = "info";
+		}else {
+			s = "danger";
+		}
+		return s;
+	}
 }

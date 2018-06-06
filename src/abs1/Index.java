@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import abs1.beans.Abs1;
 import utils.DBUtils;
@@ -32,6 +33,11 @@ public class Index extends HttpServlet {
 		String sql = null;
 		ResultSet rs = null;
 
+		int beforeIncome = 0;
+		int beforeSpend = 0;
+		int currentIncome = 0;
+		int currentSpend = 0;
+
 		try{
 			String jump = "";
 			LocalDate now = null;
@@ -40,7 +46,6 @@ public class Index extends HttpServlet {
 			}else {
 				now = LocalDate.now();
 			}
-
 			if(req.getParameter("jump") != null) {
 				 jump = req.getParameter("jump");
 			}
@@ -52,7 +57,9 @@ public class Index extends HttpServlet {
 
 			req.setAttribute("now", now);
 			LocalDate lastDayOfMonth = now.with(TemporalAdjusters.lastDayOfMonth()); // 末日
+			LocalDate ldolm = lastDayOfMonth.plusMonths(-1);
 			LocalDate firstDayOfMonth = now.with(TemporalAdjusters.firstDayOfMonth()); // 初日
+			LocalDate fdolm = firstDayOfMonth.plusMonths(-1);
 
 
 			con = DBUtils.getConnection();
@@ -66,20 +73,35 @@ public class Index extends HttpServlet {
 
 			rs = ps.executeQuery();
 
-
 			if(rs.next()) {
-				int currentIncome = rs.getInt("price");
-				req.setAttribute("currentIncome", currentIncome);
+				if(rs.getInt("price") >= 0) {
+					currentIncome = rs.getInt("price");
+					req.setAttribute("currentIncome", currentIncome);
+				}else {
+					currentIncome = 0;
+					req.setAttribute("currentIncome", currentIncome);
+					currentSpend = rs.getInt("price");
+					req.setAttribute("currentSpend", currentSpend);
+				}
 			}else {
-				int currentIncome = 0;
-				req.setAttribute("currentIncome", currentIncome);
+				List<String> errors = new ArrayList<>();
+				errors.add("データがありません。");
+
+				HttpSession session = req.getSession();
+				session.setAttribute("errors", errors);
+
+				if(jump.equals("1")) {
+					now = now.plusMonths(-1);
+				}else if(jump.equals("0")) {
+					now = now.plusMonths(1);
+				}
+
+				resp.sendRedirect("index.html?now=" + now);
+				return;
 			}
 
 			if(rs.next()) {
-				int currentSpend = rs.getInt("price");
-				req.setAttribute("currentSpend", currentSpend);
-			}else {
-				int currentSpend = 0;
+				currentSpend = rs.getInt("price");
 				req.setAttribute("currentSpend", currentSpend);
 			}
 
@@ -88,6 +110,40 @@ public class Index extends HttpServlet {
 				DBUtils.close(rs);
 			}catch(Exception e){}
 
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, ldolm.toString());
+			ps.setString(2, fdolm.toString());
+
+			rs = ps.executeQuery();
+
+			if(rs.next()) {
+				if(rs.getInt("price") < 0) {
+					beforeSpend = rs.getInt("price");
+					beforeIncome = 0;
+				}else {
+					beforeIncome = rs.getInt("price");
+				}
+				if(rs.next()) {
+					beforeSpend = rs.getInt("price");
+				}else {
+					beforeSpend = 0;
+				}
+			}else {
+				beforeSpend = 0;
+
+				beforeIncome = 0;
+			}
+
+			int compareIncome = currentIncome - beforeIncome;
+			req.setAttribute("compareIncome", compareIncome);
+			int compareSpend = currentSpend - beforeSpend;
+			req.setAttribute("compareSpend", compareSpend);
+
+			try{
+				DBUtils.close(ps);
+				DBUtils.close(rs);
+			}catch(Exception e){}
 
 			sql = "select id, date, category_data, note, price from abs1 join list on category = category_id where date between ? and ? order by id";
 
