@@ -1,3 +1,4 @@
+<%@page pageEncoding="UTF-8"%>
 	<footer class="footer">
 		<div class="container">
 			<p class="text-muted small">&copy; 2018 SIE Inc.</p>

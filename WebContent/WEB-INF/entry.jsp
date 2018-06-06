@@ -28,23 +28,9 @@
 			</div>
 		</div>
 
-		<c:if test="${errors != null}">
-			<div class="row">
-				<div class="col">
-					<div class="alert alert-danger alert-dismissible fade show" role="alert">
-						<h4 class="alert-heading h5 font-weight-bold"><span class="oi oi-pin"></span> エラーが発生しました！</h4>
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<ul>
-							<c:forEach var="error" items="${errors}">
-								<li>${error}</li>
-							</c:forEach>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</c:if>
+		<%-- error文のinclude --%>
+		<jsp:include page="_errors.jsp" />
+
 
 		<div class="row justify-content-between">
 			<div class="offset-1 col">
