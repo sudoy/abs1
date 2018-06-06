@@ -47,13 +47,13 @@
 				<label for="date" class="offset-1 col-sm-2 col-form-label font-weight-bold">日付</label>
 
 				<div class="col-2">
-					<input type="text" class="form-control" name="start" id="date" placeholder="日付" aria-describedby="dateHelp" value="">
+					<input type="text" class="form-control" name="start" id="date" placeholder="日付" aria-describedby="dateHelp" value="${param.start }">
 				</div>
 				<div class="col-1">
 					<input type="text" readonly class="form-control-plaintext text-center" id="staticEmail" value="～">
 				</div>
 				<div class="col-2">
-					<input type="text" class="form-control" name="end" id="date" placeholder="日付" aria-describedby="dateHelp" value="">
+					<input type="text" class="form-control" name="end" id="date" placeholder="日付" aria-describedby="dateHelp" value="${param.end }">
 				</div>
 				<div class="col-4">
 					<small id="dateHelp" class="text-muted align-bottom">「YYYY/MM/DD」形式で入力してください。</small>
@@ -65,7 +65,7 @@
 					<legend class="offset-1 col-form-label col-2 pt-0 font-weight-bold">カテゴリー</legend>
 					<div class="col-sm-8">
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="category-all" name="customRadioInline1" class="custom-control-input category-all" checked>
+							<input type="checkbox" id="category-all" name="customRadioInline1" class="custom-control-input category-all" ${param.eat eq '食費' && param.life eq '日用品' && param.money eq '交際費' ? 'checked' : ''   }>
 							<label class="custom-control-label" for="category-all">全て</label>
 						</div>
 					</div>
@@ -73,15 +73,15 @@
 
 					<div class="offset-3 col-sm-8">
 						<div class="custom-control custom-checkbox custom-control-inline">
- 							<input type="checkbox" id="category1" name="eat" class="custom-control-input category" value="食費" checked>
+ 							<input type="checkbox" id="category1" name="eat" class="custom-control-input category" value="食費" ${param.eat eq '食費' ? 'checked' : '' }>
 							<label class="custom-control-label"  for="category1">食費</label>
 						</div>
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="category2" name="life" class="custom-control-input category" value="日用品" checked>
+							<input type="checkbox" id="category2" name="life" class="custom-control-input category" value="日用品" ${param.life eq '日用品' ? 'checked' : '' }>
 							<label class="custom-control-label"  for="category2">日用品</label>
 						</div>
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="category3" name="money" class="custom-control-input category" value="交際費" checked>
+							<input type="checkbox" id="category3" name="money" class="custom-control-input category" value="交際費" ${param.money eq '交際費' ? 'checked' : '' }>
 							<label class="custom-control-label"  for="category3">交際費</label>
 						</div>
 					</div>
@@ -91,7 +91,7 @@
 			<div class="form-group row">
 				<label for="note" class="offset-1 col-sm-2 col-form-label font-weight-bold">備考 <span class="badge badge-success	">部分一致</span></label>
 				<div class="col-5">
-					<input type="text" class="form-control" name="note" id="note" placeholder="備考">
+					<input type="text" class="form-control" name="note" id="note" placeholder="備考" value="${param.note }">
 				</div>
 			</div>
 

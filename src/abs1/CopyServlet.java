@@ -90,6 +90,7 @@ public class CopyServlet extends HttpServlet {
 
 			getServletContext().getRequestDispatcher("/WEB-INF/copy.jsp")
 			.forward(req, resp);
+			return;
 		}
 
 		Connection con = null;

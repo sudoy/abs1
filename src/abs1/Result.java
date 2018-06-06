@@ -49,6 +49,7 @@ public class Result extends HttpServlet {
 			ps.setString(7, req.getParameter("money"));
 			ps.setString(8, "%" + req.getParameter("note") + "%");
 
+
 			rs = ps.executeQuery();
 
 			List<Abs1> list = new ArrayList<Abs1>();
