@@ -33,18 +33,25 @@ public class Result extends HttpServlet {
 
 			con = DBUtils.getConnection();
 
-			sql = "select id, date, category_data, note, price from abs1 join list on category = category_id where date between ? and ? and category_data in(?, ?, ?) and note like ? order by id";
+			sql = "select id, date, category_data, note, price "
+					+ "from abs1 join list on category = category_id "
+					+ "where case when ? = '' then date is not null else date >= ? end "
+					+ "and case when ? = '' then date is not null else date <= ? end "
+					+ "and category_data in(?, ?, ?) and note like ? order by id";
 
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, req.getParameter("start"));
-			ps.setString(2, req.getParameter("end"));
-			ps.setString(3, req.getParameter("eat"));
-			ps.setString(4, req.getParameter("life"));
-			ps.setString(5, req.getParameter("money"));
-			ps.setString(6, "%" + req.getParameter("note") + "%");
+			ps.setString(2, req.getParameter("start"));
+			ps.setString(3, req.getParameter("end"));
+			ps.setString(4, req.getParameter("end"));
+			ps.setString(5, req.getParameter("eat"));
+			ps.setString(6, req.getParameter("life"));
+			ps.setString(7, req.getParameter("money"));
+			ps.setString(8, "%" + req.getParameter("note") + "%");
 
 			System.out.println(ps);
+
 			rs = ps.executeQuery();
 
 			List<Abs1> list = new ArrayList<Abs1>();
