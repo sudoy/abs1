@@ -54,6 +54,15 @@ public class Result extends HttpServlet {
 
 			rs = ps.executeQuery();
 
+			if(!rs.next()) {
+				List<String> errors = new ArrayList<>();
+				errors.add("検索結果は1件もありません。");
+				req.setAttribute("errors", errors);
+				getServletContext().getRequestDispatcher("/search.html")
+					.forward(req, resp);
+				return;
+			}
+
 			List<Abs1> list = new ArrayList<Abs1>();
 			while(rs.next()) {
 				Abs1 t = new Abs1(rs.getInt("id"), rs.getDate("date"),
