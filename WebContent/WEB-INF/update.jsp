@@ -104,7 +104,7 @@
 
 			<div class="form-group row">
 				<div class="offset-4 col-8">
-					<a href="detail.html" class="btn btn-secondary">キャンセル</a>
+					<a href="detail.html?id=${data.id }" class="btn btn-secondary">キャンセル</a>
 					<a href="index.html" class="btn btn-primary"><span class="oi oi-check"></span> 修正OK</a>
 				</div>
 			</div>

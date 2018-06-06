@@ -19,6 +19,7 @@ public class DeleteServlet extends HttpServlet {
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 				throws ServletException, IOException {
 
+			req.setCharacterEncoding("utf-8");
 			Connection con = null;
 			PreparedStatement ps = null;
 			String sql = null;
