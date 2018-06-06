@@ -22,7 +22,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<ul>
-						<li>「2018/05/30 交際費 -6,800」を登録しましたよ。</li>
+						<li>「2018/05/30 交際費 -6,800」を登録しました${param.category}。</li>
 					</ul>
 				</div>
 			</div>
@@ -71,10 +71,10 @@
 				<label for="category" class="offset-2 col-sm-2 col-form-label font-weight-bold">カテゴリー <span class="badge badge-danger">必須</span></label>
 				<div class="col-4">
 					<select class="custom-select" name="category" id="category">
-						<option value="0" selected>選択して下さい</option>
-						<option value="1">食費</option>
-						<option value="2">日用品</option>
-						<option value="3">交際費</option>
+						<option value="0">選択して下さい</option>
+						<option value="1" ${param.category == 1 ? "selected" : ""}>食費</option>
+						<option value="2" ${param.category == 2 ? "selected" : ""}>日用品</option>
+						<option value="3" ${param.category == 3 ? "selected" : ""}>交際費</option>
 					</select>
 				</div>
 			</div>
