@@ -29,7 +29,7 @@ public class EntryServlet extends HttpServlet {
 
 
 		List<String> errors = validate(req);
-		if(!(errors == null)) {
+		if(errors.size() != 0) {
 			req.setAttribute("errors", errors);
 
 			getServletContext().getRequestDispatcher("/WEB-INF/entry.jsp")
