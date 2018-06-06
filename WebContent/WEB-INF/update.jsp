@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="utils.HTMLUtils"%>
 
 <!doctype html>
 <html lang="ja">
@@ -51,11 +52,11 @@
 
 		<hr class="mt-1">
 
-		<form action="#" method="post">
+		<form action="update.html?id=${data.id}" method="post">
 			<div class="form-group row">
 				<label for="date" class="offset-2 col-sm-2 col-form-label font-weight-bold">日付 <span class="badge badge-danger">必須</span></label>
 				<div class="col-2">
-					<input type="text" class="form-control" id="date" placeholder="日付" aria-describedby="dateHelp" value="${HTMLUtils.dateFormat(data.date)}">
+					<input type="text" class="form-control" name="date" id="date" placeholder="日付" aria-describedby="dateHelp" value="${HTMLUtils.dateFormat(data.date)}">
 				</div>
 				<div class="col-4">
 					<small id="dateHelp" class="text-muted align-bottom">「YYYY/MM/DD」形式で入力してください。</small>
@@ -83,29 +84,29 @@
 				<div class="col-4">
 					<select class="custom-select" name="category" id="category">
 						<option value="0">選択して下さい</option>
-						<option value="食費" ${data.category eq '1' ? 'selected' : ''}>食費</option>
-						<option value="日用品" ${data.category eq '2' ? 'selected' : ''}>日用品</option>
-						<option value="交際費" ${data.category eq '3' ? 'selected' : ''}>交際費</option>
+						<option value="1" ${data.category eq '1' ? 'selected' : ''}>食費</option>
+						<option value="2" ${data.category eq '2' ? 'selected' : ''}>日用品</option>
+						<option value="3" ${data.category eq '3' ? 'selected' : ''}>交際費</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="note" class="offset-2 col-sm-2 col-form-label font-weight-bold">備考</label>
 				<div class="col-6">
-					<textarea class="form-control" id="note" placeholder="備考" rows="3">${data.note}</textarea>
+					<textarea class="form-control" name="note" id="note" placeholder="備考" rows="3">${data.note}</textarea>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="amount" class="offset-2 col-sm-2 col-form-label font-weight-bold">金額 <span class="badge badge-danger">必須</span></label>
 				<div class="col-2">
-					<input type="text" class="form-control" id="amount" placeholder="金額" value="${data.price}">
+					<input type="text" class="form-control" name="price" id="amount" placeholder="金額" value="${data.price}">
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<div class="offset-4 col-8">
 					<a href="detail.html?id=${data.id }" class="btn btn-secondary">キャンセル</a>
-					<a href="index.html" class="btn btn-primary"><span class="oi oi-check"></span> 修正OK</a>
+					<button type="submit" class="btn btn-primary"><span class="oi oi-check"></span> 修正OK</button>
 				</div>
 			</div>
 		</form>

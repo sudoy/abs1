@@ -16,8 +16,9 @@ import utils.DBUtils;
 
 @WebServlet("/update.html")
 public class Update extends HttpServlet {
+
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 
@@ -43,6 +44,8 @@ public class Update extends HttpServlet {
 			//パラメータをセット
 			ps.setString(1, id);
 
+			System.out.println(ps);
+
 			//実行
 			rs = ps.executeQuery();
 
@@ -57,6 +60,9 @@ public class Update extends HttpServlet {
 
 			req.setAttribute("data", t);
 
+			//フォワード
+			getServletContext().getRequestDispatcher("/WEB-INF/update.jsp").forward(req, resp);
+
 		}catch(Exception e){
 			throw new ServletException(e);
 		}finally{
@@ -70,9 +76,57 @@ public class Update extends HttpServlet {
 			}
 		}
 
-		//フォワード
-		getServletContext().getRequestDispatcher("/WEB-INF/update.jsp").forward(req, resp);
-
 
 	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+
+		try {
+			con = DBUtils.getConnection();
+
+			sql = "UPDATE abs1 SET date = ?, category = ?, note = ?, price = ? WHERE id = ?";
+
+			//準備
+			ps = con.prepareStatement(sql);
+
+			//データをセット
+			ps.setString(1, req.getParameter("date"));
+			ps.setString(2, req.getParameter("category"));
+			ps.setString(3, req.getParameter("note"));
+			ps.setString(4, req.getParameter("price"));
+			ps.setString(5, req.getParameter("id"));
+
+			System.out.println(req.getParameter("id"));
+
+			System.out.println(ps);
+			//実行
+			ps.executeUpdate();
+
+			//リダイレクト
+			resp.sendRedirect("index.html");
+
+
+		}catch(Exception e){
+			throw new ServletException(e);
+
+		}finally{
+
+			try{
+				DBUtils.close(ps);
+				DBUtils.close(con);
+
+			}catch(Exception e){
+
+			}
+		}
+
+	}
+
 }

@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@page import="utils.HTMLUtils"%>
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +51,7 @@
 
 		<hr class="mt-1">
 
-		<form action="update.html?id=${data.id}" method="post">
+		<form action="#" method="post">
 			<div class="form-group row">
 				<label for="date" class="offset-2 col-sm-2 col-form-label font-weight-bold">日付</label>
 				<div class="col-2">
@@ -110,7 +108,7 @@
 			<div class="form-group row">
 				<div class="offset-4 col-6">
 					<a href="index.html" class="btn btn-secondary">キャンセル</a>
-					<button type="submit" class="btn btn-primary"><span class="oi oi-pencil"></span> 修 正</button>
+					<a href="update.html?id=${data.id }" class="btn btn-primary"><span class="oi oi-pencil"></span> 修 正</a>
 				</div>
 				<div class="col-2 text-right">
 					<a href="index.html" class="btn btn-danger delete-btn"><span class="oi oi-trash"></span> 削 除</a>
