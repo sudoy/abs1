@@ -24,9 +24,9 @@
 
 		<div class="row">
 			<div class="offset-1 col">
-				<span class="badge badge-info">日付：2018/5/1 ～ 2018/5/31</span>
-				<span class="badge badge-info">カテゴリー：日用品、食費</span>
-				<span class="badge badge-info">備考：ランチ</span>
+				<c:if test="${!param.start.equals(\"\") || !param.end.equals(\"\")}"><span class="badge badge-info">日付：${param.start} ～ ${param.end}</span></c:if>
+				<c:if test="${!condition.equals(\"\")}"><span class="badge badge-info">カテゴリー：${condition}</span></c:if>
+				<c:if test="${!param.note.equals(\"\")}"><span class="badge badge-info">備考：${param.note}</span></c:if>
 			</div>
 		</div>
 

@@ -50,8 +50,6 @@ public class Result extends HttpServlet {
 			ps.setString(7, req.getParameter("money"));
 			ps.setString(8, "%" + req.getParameter("note") + "%");
 
-			System.out.println(ps);
-
 			rs = ps.executeQuery();
 
 			if(!rs.next()) {
@@ -72,6 +70,23 @@ public class Result extends HttpServlet {
 			}
 
 			req.setAttribute("list", list);
+
+			List<String> conditions = new ArrayList<>();
+			conditions.add(req.getParameter("eat"));
+			conditions.add(req.getParameter("life"));
+			conditions.add(req.getParameter("money"));
+
+			String condition = "";
+
+			for(int i = 0; i < conditions.size(); i++) {
+				if(i == conditions.size() - 1) {
+					condition = condition.concat(conditions.get(i));
+				}else {
+					condition = condition.concat(conditions.get(i) + ", ");
+				}
+			}
+
+			req.setAttribute("condition", condition);
 
 		}catch(Exception e){
 			throw new ServletException(e);
