@@ -44,8 +44,6 @@ public class Update extends HttpServlet {
 			//パラメータをセット
 			ps.setString(1, id);
 
-			System.out.println(ps);
-
 			//実行
 			rs = ps.executeQuery();
 

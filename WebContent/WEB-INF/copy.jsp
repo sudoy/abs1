@@ -84,10 +84,10 @@
 				<label for="category" class="offset-2 col-sm-2 col-form-label font-weight-bold">カテゴリー <span class="badge badge-danger">必須</span></label>
 				<div class="col-4">
 					<select class="custom-select" name="category" id="category">
-						<option>選択して下さい</option>
-						<option ${data.category eq '1' ? 'selected' : ''}>食費</option>
-						<option ${data.category eq '2' ? 'selected' : ''}>日用品</option>
-						<option ${data.category eq '3' ? 'selected' : ''}>交際費</option>
+						<option value="0">選択して下さい</option>
+						<option value="1" ${data.category eq '1' ? 'selected' : ''}>食費</option>
+						<option value="2" ${data.category eq '2' ? 'selected' : ''}>日用品</option>
+						<option value="3" ${data.category eq '3' ? 'selected' : ''}>交際費</option>
 					</select>
 				</div>
 			</div>
@@ -107,7 +107,7 @@
 			<div class="form-group row">
 				<div class="offset-4 col-8">
 					<a href="index.html" class="btn btn-secondary">キャンセル</a>
-					<a href="index.html" class="btn btn-primary"><span class="oi oi-check"></span> コピーOK</a>
+					<button type="submit" class="btn btn-primary"><span class="oi oi-check"></span> コピーOK</button>
 				</div>
 			</div>
 		</form>
