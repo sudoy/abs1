@@ -33,7 +33,7 @@ public class Result extends HttpServlet {
 
 			con = DBUtils.getConnection();
 
-			sql = "select id, date, category_data, note, price from abs1 join list on category = category_id where date between ? and ? and category_data in(?, ?, ?) and note=? order by id";
+			sql = "select id, date, category_data, note, price from abs1 join list on category = category_id where date between ? and ? and category_data in(?, ?, ?) and note like ? order by id";
 
 			ps = con.prepareStatement(sql);
 
@@ -42,8 +42,9 @@ public class Result extends HttpServlet {
 			ps.setString(3, req.getParameter("eat"));
 			ps.setString(4, req.getParameter("life"));
 			ps.setString(5, req.getParameter("money"));
-			ps.setString(6, req.getParameter("note"));
+			ps.setString(6, "%" + req.getParameter("note") + "%");
 
+			System.out.println(ps);
 			rs = ps.executeQuery();
 
 			List<Abs1> list = new ArrayList<Abs1>();
