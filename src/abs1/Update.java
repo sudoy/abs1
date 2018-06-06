@@ -109,7 +109,11 @@ public class Update extends HttpServlet {
 			ps.setString(1, req.getParameter("date"));
 			ps.setString(2, req.getParameter("category"));
 			ps.setString(3, req.getParameter("note"));
-			ps.setString(4, req.getParameter("price"));
+			if(req.getParameter("division").equals("支出")) {
+				ps.setString(4, "-" + req.getParameter("price"));
+			}else if(req.getParameter("division").equals("収入")){
+				ps.setString(4, req.getParameter("price"));
+			}
 			ps.setString(5, req.getParameter("id"));
 
 			//実行

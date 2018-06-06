@@ -3,6 +3,9 @@ package abs1;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +81,25 @@ public class EntryServlet extends HttpServlet {
 		List<String> list = new ArrayList<>();
 		if(req.getParameter("date").equals("")) {
 			list.add("日付は必須入力です。");
+		}else{
+			//形式の判定
+			try {
+				DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+
+			    String s1 = req.getParameter("date");
+			    String s2 = df.format(df.parse(s1));
+
+			    if(s1.equals(s2)) {
+
+			    }else {
+			    	list.add("期限は「YYYY/MM/DD」形式で入力して下さい。");
+			    }
+
+			}catch(ParseException p) {
+
+				list.add("期限は「YYYY/MM/DD」形式で入力して下さい。");
+
+			}
 		}
 		if(req.getParameter("category").equals("0")) {
 			list.add("カテゴリーは必須入力です。");

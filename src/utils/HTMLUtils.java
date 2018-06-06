@@ -33,4 +33,26 @@ public class HTMLUtils {
 		}
 		return s;
 	}
+	public static int priceFormat(int price) {
+		int p = 0;
+		if(price < 0) {
+			p = price * -1;
+		}else {
+			p = price;
+		}
+
+		return p;
+
+	}
+
+	public static String checkDivision(int price) {
+		String s = "";
+		if(price < 0) {
+			s = "支出";
+		}else {
+			s = "収入";
+		}
+
+		return s;
+	}
 }

@@ -53,11 +53,11 @@
 					<legend class="offset-2 col-form-label col-2 pt-0 font-weight-bold">区分</legend>
 					<div class="col-sm-8">
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="division1" name="division" class="custom-control-input" checked disabled>
+							<input type="radio" id="division1" name="division" class="custom-control-input" ${HTMLUtils.checkDivision(data.price) eq '支出' ? 'checked' : param.division eq '支出' ? 'checked' : '' } disabled>
 							<label class="custom-control-label" for="division1">支出</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="division2" name="division" class="custom-control-input" disabled>
+							<input type="radio" id="division2" name="division" class="custom-control-input" ${HTMLUtils.checkDivision(data.price) eq '収入' ? 'checked' : param.division eq '収入' ? 'checked' : '' } disabled>
 							<label class="custom-control-label" for="division2">収入</label>
 						</div>
 					</div>
@@ -87,7 +87,7 @@
 			<div class="form-group row">
 				<label for="amount" class="offset-2 col-sm-2 col-form-label font-weight-bold">金額</label>
 				<div class="col-2">
-					<input type="text" class="form-control" name="price" id="amount" placeholder="金額" value="${data.price}" readonly>
+					<input type="text" class="form-control" name="price" id="amount" placeholder="金額" value="${HTMLUtils.priceFormat(data.price)}" readonly>
 				</div>
 			</div>
 

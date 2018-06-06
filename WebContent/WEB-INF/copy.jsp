@@ -72,9 +72,9 @@
 				<div class="col-4">
 					<select class="custom-select" name="category" id="category">
 						<option value="0">選択して下さい</option>
-						<option value="1" ${data.category eq '1' ? 'selected' : ''}>食費</option>
-						<option value="2" ${data.category eq '2' ? 'selected' : ''}>日用品</option>
-						<option value="3" ${data.category eq '3' ? 'selected' : ''}>交際費</option>
+						<option value="1" ${data.category eq '1' ? 'selected' : param.category eq '1' ? 'selected' : ''}>食費</option>
+						<option value="2" ${data.category eq '2' ? 'selected' : param.category eq '2' ? 'selected' : ''}>日用品</option>
+						<option value="3" ${data.category eq '3' ? 'selected' : param.category eq '3' ? 'selected' : ''}>交際費</option>
 					</select>
 				</div>
 			</div>
@@ -87,7 +87,7 @@
 			<div class="form-group row">
 				<label for="amount" class="offset-2 col-sm-2 col-form-label font-weight-bold">金額 <span class="badge badge-danger">必須</span></label>
 				<div class="col-2">
-					<input type="text" class="form-control" name="price" id="amount" placeholder="金額" value="${param.price != null ? param.price : data.price}">
+					<input type="text" class="form-control" name="price" id="amount" placeholder="金額" value="${ HTMLUtils.priceFormat(data.price)}">
 				</div>
 			</div>
 

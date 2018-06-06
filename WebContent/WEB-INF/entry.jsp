@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -56,11 +57,11 @@
 					<legend class="offset-2 col-form-label col-2 pt-0 font-weight-bold">区分</legend>
 					<div class="col-sm-8">
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="division1" name="division" class="custom-control-input" value="支出" checked>
+							<input type="radio" id="division1" name="division" class="custom-control-input" value="支出" ${param.division eq null ? 'checked' : param.division eq '支出' ? 'checked' : '' }>
 							<label class="custom-control-label" for="division1">支出</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="division2" name="division" class="custom-control-input" value="収入">
+							<input type="radio" id="division2" name="division" class="custom-control-input" value="収入" ${param.division eq '収入' ? 'checked' : '' }>
 							<label class="custom-control-label" for="division2">収入</label>
 						</div>
 					</div>
