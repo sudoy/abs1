@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -82,6 +84,14 @@ public class CopyServlet extends HttpServlet {
 
 		req.setCharacterEncoding("utf-8");
 
+		List<String> errors = validate(req);
+		if(errors.size() != 0) {
+			req.setAttribute("errors", errors);
+
+			getServletContext().getRequestDispatcher("/WEB-INF/copy.jsp")
+			.forward(req, resp);
+		}
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -114,6 +124,25 @@ public class CopyServlet extends HttpServlet {
 		}
 
 		resp.sendRedirect("index.html");
+	}
+
+	private List<String> validate(HttpServletRequest req){
+		List<String> list = new ArrayList<>();
+		if(req.getParameter("date").equals("")) {
+			list.add("日付は必須入力です。");
+		}
+		if(req.getParameter("category").equals("0")) {
+			list.add("カテゴリーは必須入力です。");
+		}
+		if(req.getParameter("price").equals("")) {
+			list.add("金額は必須入力です。");
+		}
+		try {
+			int a = Integer.parseInt(req.getParameter("price"));
+		}catch(Exception e) {
+			list.add("金額は数字を入力してください。");
+		}
+		return list;
 	}
 
 }

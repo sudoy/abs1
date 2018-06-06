@@ -57,7 +57,7 @@
 			<div class="form-group row">
 				<label for="date" class="offset-2 col-sm-2 col-form-label font-weight-bold">日付 <span class="badge badge-danger">必須</span></label>
 				<div class="col-2">
-					<input type="text" class="form-control" name="date" id="date" placeholder="日付" aria-describedby="dateHelp" value="${HTMLUtils.dateFormat(data.date)}">
+					<input type="text" class="form-control" name="date" id="date" placeholder="日付" aria-describedby="dateHelp" value="${param.date != null ? param.date : HTMLUtils.dateFormat(data.date)}">
 				</div>
 				<div class="col-4">
 					<small id="dateHelp" class="text-muted align-bottom">「YYYY/MM/DD」形式で入力してください。</small>
@@ -94,13 +94,13 @@
 			<div class="form-group row">
 				<label for="note" class="offset-2 col-sm-2 col-form-label font-weight-bold">備考</label>
 				<div class="col-6">
-					<textarea class="form-control" name="note" id="note" placeholder="備考" rows="3">${data.note}</textarea>
+					<textarea class="form-control" name="note" id="note" placeholder="備考" rows="3">${param.note != null ? param.note : data.note}</textarea>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="amount" class="offset-2 col-sm-2 col-form-label font-weight-bold">金額 <span class="badge badge-danger">必須</span></label>
 				<div class="col-2">
-					<input type="text" class="form-control" name="price" id="amount" placeholder="金額" value="${data.price}">
+					<input type="text" class="form-control" name="price" id="amount" placeholder="金額" value="${param.price != null ? param.price : data.price}">
 				</div>
 			</div>
 

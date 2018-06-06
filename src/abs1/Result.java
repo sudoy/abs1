@@ -30,7 +30,6 @@ public class Result extends HttpServlet {
 
 		try{
 
-
 			con = DBUtils.getConnection();
 
 			sql = "select id, date, category_data, note, price "
@@ -52,16 +51,8 @@ public class Result extends HttpServlet {
 
 			rs = ps.executeQuery();
 
-			if(!rs.next()) {
-				List<String> errors = new ArrayList<>();
-				errors.add("検索結果は1件もありません。");
-				req.setAttribute("errors", errors);
-				getServletContext().getRequestDispatcher("/search.html")
-					.forward(req, resp);
-				return;
-			}
-
 			List<Abs1> list = new ArrayList<Abs1>();
+
 			while(rs.next()) {
 				Abs1 t = new Abs1(rs.getInt("id"), rs.getDate("date"),
 						rs.getString("category_data"), rs.getString("note"),
@@ -70,6 +61,16 @@ public class Result extends HttpServlet {
 			}
 
 			req.setAttribute("list", list);
+
+			if(list.isEmpty()) {
+
+				List<String> errors = new ArrayList<>();
+				errors.add("検索結果は1件もありません。");
+				req.setAttribute("errors", errors);
+				getServletContext().getRequestDispatcher("/search.html")
+					.forward(req, resp);
+				return;
+			}
 
 			List<String> conditions = new ArrayList<>();
 			conditions.add(req.getParameter("eat"));
@@ -88,6 +89,9 @@ public class Result extends HttpServlet {
 
 			req.setAttribute("condition", condition);
 
+			//フォワード
+			getServletContext().getRequestDispatcher("/WEB-INF/result.jsp").forward(req, resp);
+
 		}catch(Exception e){
 			throw new ServletException(e);
 		}finally{
@@ -97,7 +101,6 @@ public class Result extends HttpServlet {
 				DBUtils.close(rs);
 			}catch(Exception e){}
 		}
-		//フォワード
-		getServletContext().getRequestDispatcher("/WEB-INF/result.jsp").forward(req, resp);
+
 	}
 }
