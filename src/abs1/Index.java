@@ -95,6 +95,14 @@ public class Index extends HttpServlet {
 				if(rs.getInt("price") >= 0) {
 					currentIncome = rs.getInt("price");
 					req.setAttribute("currentIncome", currentIncome);
+					if(rs.next()) {
+						currentSpend = rs.getInt("price");
+						req.setAttribute("currentSpend", currentSpend);
+					}else {
+						currentSpend = 0;
+						req.setAttribute("currentSpend", currentSpend);
+					}
+
 				}else {
 					currentIncome = 0;
 					req.setAttribute("currentIncome", currentIncome);
@@ -112,13 +120,7 @@ public class Index extends HttpServlet {
 
 			}
 
-			if(rs.next()) {
-				currentSpend = rs.getInt("price");
-				req.setAttribute("currentSpend", currentSpend);
-			}else {
-				currentSpend = 0;
-				req.setAttribute("currentSpend", currentSpend);
-			}
+
 
 			try{
 				DBUtils.close(ps);
