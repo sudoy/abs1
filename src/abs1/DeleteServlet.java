@@ -27,6 +27,11 @@ public class DeleteServlet extends HttpServlet {
 			HttpSession session = req.getSession();
 			req.setCharacterEncoding("utf-8");
 
+			if(req.getParameter("id") == null) {
+				resp.sendRedirect("index.html");
+				return;
+			}
+
 			Connection con = null;
 			PreparedStatement ps = null;
 			String sql = null;

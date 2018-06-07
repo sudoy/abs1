@@ -50,7 +50,7 @@ public class Index extends HttpServlet {
 			LocalDate now = null;
 
 			if(req.getParameter("now") != null) {
-				now = ServletUtils.stringParse(req);
+				now = ServletUtils.stringParse(req.getParameter("now"));
 			}else {
 				now = LocalDate.now();
 			}

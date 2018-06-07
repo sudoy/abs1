@@ -21,6 +21,11 @@ public class DetailServlet extends HttpServlet {
 			throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 
+		if(req.getParameter("id") == null) {
+			resp.sendRedirect("index.html");
+			return;
+		}
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;

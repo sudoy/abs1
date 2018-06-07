@@ -26,6 +26,12 @@ public class Update extends HttpServlet {
 			throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 
+		if(req.getParameter("id") == null) {
+			resp.sendRedirect("index.html");
+			return;
+		}
+
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -132,7 +138,7 @@ public class Update extends HttpServlet {
 			session.setAttribute("successes", successes);
 
 			//リダイレクト
-			resp.sendRedirect("index.html");
+			resp.sendRedirect("index.html?now=" + ServletUtils.stringParse(req.getParameter("date")));
 
 
 		}catch(Exception e){

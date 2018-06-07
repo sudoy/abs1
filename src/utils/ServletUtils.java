@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 
 public class ServletUtils {
 
-	public static LocalDate stringParse(HttpServletRequest req) {
-		return LocalDate.parse(req.getParameter("now"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	public static LocalDate stringParse(String date) {
+		return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 
 	public static String categoryCatch(HttpServletRequest req) {
