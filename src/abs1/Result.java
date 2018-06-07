@@ -36,8 +36,10 @@ public class Result extends HttpServlet {
 
 		req.setCharacterEncoding("utf-8");
 
+
 		HttpSession session = req.getSession();
 		List<String> errors = validate(req);
+
 		if(errors.size() != 0) {
 			session.setAttribute("errors", errors);
 

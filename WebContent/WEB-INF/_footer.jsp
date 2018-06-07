@@ -9,6 +9,8 @@
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 
+	<% session.setAttribute("errors", null); %>
+
 <script>
 $(function(){
 	$('.delete-btn').on('click', function(){
