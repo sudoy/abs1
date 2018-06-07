@@ -68,7 +68,7 @@ public class Result extends HttpServlet {
 				List<String> errors = new ArrayList<>();
 				errors.add("検索結果は1件もありません。");
 				req.setAttribute("errors", errors);
-				getServletContext().getRequestDispatcher("/search.html")
+				getServletContext().getRequestDispatcher("/WEB-INF/search.jsp")
 					.forward(req, resp);
 				return;
 			}

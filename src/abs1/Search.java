@@ -14,6 +14,8 @@ public class Search extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
+
+
 		//フォワード
 		getServletContext().getRequestDispatcher("/WEB-INF/search.jsp").forward(req, resp);
 	}
