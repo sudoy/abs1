@@ -74,9 +74,9 @@ public class Result extends HttpServlet {
 			}
 
 			List<String> conditions = new ArrayList<>();
-			conditions.add(req.getParameter("eat"));
-			conditions.add(req.getParameter("life"));
-			conditions.add(req.getParameter("money"));
+			if(req.getParameter("eat") != null)conditions.add(req.getParameter("eat"));
+			if(req.getParameter("life") != null)conditions.add(req.getParameter("life"));
+			if(req.getParameter("money") != null)conditions.add(req.getParameter("money"));
 
 			String condition = "";
 
