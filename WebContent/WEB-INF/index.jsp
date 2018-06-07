@@ -55,7 +55,7 @@
 				<nav class="float-left">
 					<ul class="pagination">
 						<li class="page-item">
-							<a class="page-link" href="#"><span class="oi oi-chevron-left"></span><span class="oi oi-chevron-left"></span> 前年</a>
+							<a class="page-link" href="index.html?jumpY=0&now=${now}"><span class="oi oi-chevron-left"></span><span class="oi oi-chevron-left"></span> 前年</a>
 						</li>
 						<li class="page-item">
 							<a class="page-link" href="index.html?jump=0&now=${now}"><span class="oi oi-chevron-left"></span> 前月</a>
@@ -75,7 +75,7 @@
 							<a class="page-link" href="index.html?jump=1&now=${now}">翌月 <span class="oi oi-chevron-right"></span></a>
 						</li>
 						<li class="page-item">
-							<a class="page-link" href="index.html">翌年 <span class="oi oi-chevron-right"></span><span class="oi oi-chevron-right"></span></a>
+							<a class="page-link" href="index.html?jumpY=1&now=${now}">翌年 <span class="oi oi-chevron-right"></span><span class="oi oi-chevron-right"></span></a>
 						</li>
 					</ul>
 				</nav>
@@ -87,7 +87,7 @@
 				<div class="card bg-light border-info mb-4">
 					<div class="card-header text-center"><span class="oi oi-yen"></span> 今月の収入合計 <small class="text-muted">（先月比）</small></div>
 					<div class="card-body">
-						<p class="card-text text-center">${currentIncome}<small class="text-${HTMLUtils.color(compareIncome)}">（${compareIncome}）</small></p>
+						<p class="card-text text-center"><fmt:formatNumber value="${currentIncome}" pattern="0,000" /><small class="text-${HTMLUtils.color(compareIncome)}">（${HTMLUtils.addPlus(compareIncome)}）</small></p>
 					</div>
 				</div>
 			</div>
@@ -96,7 +96,7 @@
 				<div class="card bg-light border-dark mb-4">
 					<div class="card-header text-center"><span class="oi oi-yen"></span> 今月の支出合計 <small class="text-muted">（先月比）</small></div>
 					<div class="card-body">
-						<p class="card-text text-center">${currentSpend}<small class="text-${HTMLUtils.color(compareSpend)}">（${compareSpend}）</small></p>
+						<p class="card-text text-center"><fmt:formatNumber value="${currentSpend}" pattern="0,000" /><small class="text-${HTMLUtils.color(compareSpend)}">（${HTMLUtils.addPlus(compareSpend)}）</small></p>
 					</div>
 				</div>
 			</div>
@@ -133,7 +133,7 @@
 								<td>${HTMLUtils.dateFormat(abs1.date)}</td>
 								<td>${abs1.category}</td>
 								<td>${abs1.note}</td>
-								<td class="text-right">${abs1.price}</td>
+								<td class="text-right"><fmt:formatNumber value="${abs1.price}" pattern="0,000" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>
