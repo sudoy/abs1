@@ -55,4 +55,12 @@ public class HTMLUtils {
 
 		return s;
 	}
+
+	public static String addPlus(Integer price) {
+		String s = String.valueOf(price);
+		if(price >= 0) {
+			s = "+" + s;
+		}
+		return s;
+	}
 }

@@ -28,6 +28,8 @@ public class Index extends HttpServlet {
 			throws ServletException, IOException {
 
 		req.setCharacterEncoding("utf-8");
+		HttpSession session = req.getSession();
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -38,14 +40,20 @@ public class Index extends HttpServlet {
 		int currentIncome = 0;
 		int currentSpend = 0;
 
+		LocalDate today = LocalDate.now();
+		session.setAttribute("today", today);
+
 		try{
 			String jump = "";
+			String jumpY = "";
 			LocalDate now = null;
+
 			if(req.getParameter("now") != null) {
 				now = ServletUtils.stringParse(req);
 			}else {
 				now = LocalDate.now();
 			}
+
 			if(req.getParameter("jump") != null) {
 				 jump = req.getParameter("jump");
 			}
@@ -53,6 +61,15 @@ public class Index extends HttpServlet {
 				now = now.plusMonths(-1);
 			}else if(jump.equals("1")) {
 				now = now.plusMonths(1);
+			}
+
+			if(req.getParameter("jumpY") != null) {
+				 jumpY = req.getParameter("jumpY");
+			}
+			if(jumpY.equals("0")) {
+				now = now.plusYears(-1);
+			}else if(jumpY.equals("1")) {
+				now = now.plusYears(1);
 			}
 
 			req.setAttribute("now", now);
@@ -87,17 +104,11 @@ public class Index extends HttpServlet {
 				List<String> errors = new ArrayList<>();
 				errors.add("データがありません。");
 
-				HttpSession session = req.getSession();
 				session.setAttribute("errors", errors);
 
-				if(jump.equals("1")) {
-					now = now.plusMonths(-1);
-				}else if(jump.equals("0")) {
-					now = now.plusMonths(1);
-				}
+				req.setAttribute("currentIncome", "0");
+				req.setAttribute("currentSpend", "0");
 
-				resp.sendRedirect("index.html?now=" + now);
-				return;
 			}
 
 			if(rs.next()) {
@@ -112,8 +123,8 @@ public class Index extends HttpServlet {
 
 			ps = con.prepareStatement(sql);
 
-			ps.setString(1, ldolm.toString());
-			ps.setString(2, fdolm.toString());
+			ps.setString(1, fdolm.toString());
+			ps.setString(2, ldolm.toString());
 
 			rs = ps.executeQuery();
 
@@ -134,7 +145,6 @@ public class Index extends HttpServlet {
 
 				beforeIncome = 0;
 			}
-
 			int compareIncome = currentIncome - beforeIncome;
 			req.setAttribute("compareIncome", compareIncome);
 			int compareSpend = currentSpend - beforeSpend;
