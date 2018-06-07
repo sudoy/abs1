@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import utils.DBUtils;
+import utils.ServletUtils;
 
 
 @WebServlet("/entry.html")
@@ -77,7 +78,7 @@ public class EntryServlet extends HttpServlet {
 		}
 		List<String> successes = new ArrayList<>();
 		String success = "「" + req.getParameter("date") + " "
-				+ req.getParameter("category") + " "
+				+ ServletUtils.categoryCatch(req) + " "
 				+ req.getParameter("price") + "」を登録しました。";
 		successes.add(success);
 

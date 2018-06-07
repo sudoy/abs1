@@ -155,7 +155,7 @@ public class Index extends HttpServlet {
 				DBUtils.close(rs);
 			}catch(Exception e){}
 
-			sql = "select id, date, category_data, note, price from abs1 join list on category = category_id where date between ? and ? order by id";
+			sql = "select id, date, category_data, note, price from abs1 join list on category = category_id where date between ? and ? order by date";
 
 			ps = con.prepareStatement(sql);
 

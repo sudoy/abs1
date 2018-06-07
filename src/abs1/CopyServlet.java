@@ -133,7 +133,7 @@ public class CopyServlet extends HttpServlet {
 		List<String> successes = new ArrayList<>();
 		String success = "「" + req.getParameter("date") + " "
 				+ req.getParameter("category") + " "
-				+ req.getParameter("price") + "」を更新しました。";
+				+ req.getParameter("price") + "」を登録しました。";
 		successes.add(success);
 
 		session.setAttribute("successes", successes);
