@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import abs1.beans.Abs1;
-import abs1.beans.Category;
 import utils.DBUtils;
 
 @WebServlet("/copy.html")
@@ -25,6 +24,7 @@ public class CopyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		req.setCharacterEncoding("utf-8");
+		HttpSession session = req.getSession();
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -62,30 +62,30 @@ public class CopyServlet extends HttpServlet {
 
 			req.setAttribute("data", t);
 
-			//カテゴリー表示
-			try{
-				DBUtils.close(ps);
-				DBUtils.close(rs);
-			}catch(Exception e){}
-
-			sql = "SELECT category_id, category_data FROM list ORDER BY category_id";
-
-			ps = con.prepareStatement(sql);
-
-			rs = ps.executeQuery();
-
-
-			List<Category> categories = new ArrayList<Category>();
-
-			while(rs.next()) {
-				Category c = new Category(
-						rs.getInt("category_id"),
-						rs.getString("category_data")
-						);
-				categories.add(c);
-			}
-
-			req.setAttribute("categories", categories);
+//			//カテゴリー表示
+//			try{
+//				DBUtils.close(ps);
+//				DBUtils.close(rs);
+//			}catch(Exception e){}
+//
+//			sql = "SELECT category_id, category_data FROM list ORDER BY category_id";
+//
+//			ps = con.prepareStatement(sql);
+//
+//			rs = ps.executeQuery();
+//
+//
+//			List<Category> categories = new ArrayList<>();
+//
+//			while(rs.next()) {
+//				Category c = new Category(
+//						rs.getInt("category_id"),
+//						rs.getString("category_data")
+//						);
+//				categories.add(c);
+//			}
+//
+//			req.setAttribute("categories", categories);
 
 			//フォワード
 			getServletContext().getRequestDispatcher("/WEB-INF/copy.jsp").forward(req, resp);
@@ -113,6 +113,7 @@ public class CopyServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 
 		List<String> errors = validate(req);
+
 		if(errors.size() != 0) {
 			req.setAttribute("errors", errors);
 
@@ -147,6 +148,9 @@ public class CopyServlet extends HttpServlet {
 			}
 
 			ps.executeUpdate();
+
+
+
 		}catch(Exception e){
 			throw new ServletException(e);
 		}finally{

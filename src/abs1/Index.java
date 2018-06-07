@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import abs1.beans.Abs1;
+import abs1.beans.Category;
 import utils.DBUtils;
 import utils.ServletUtils;
 
@@ -173,6 +174,31 @@ public class Index extends HttpServlet {
 			}
 
 			req.setAttribute("list", list);
+
+
+			//カテゴリー表示
+			try{
+				DBUtils.close(ps);
+				DBUtils.close(rs);
+			}catch(Exception e){}
+
+			sql = "SELECT category_id, category_data FROM list ORDER BY category_id";
+
+			ps = con.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			List<Category> categories = new ArrayList<>();
+
+			while(rs.next()) {
+				Category c = new Category(
+						rs.getInt("category_id"),
+						rs.getString("category_data")
+						);
+				categories.add(c);
+			}
+
+			session.setAttribute("categories", categories);
 
 		}catch(Exception e){
 			throw new ServletException(e);

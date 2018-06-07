@@ -54,17 +54,9 @@
 				</div>
 			</fieldset>
 
-			<div class="form-group row">
-				<label for="category" class="offset-2 col-sm-2 col-form-label font-weight-bold">カテゴリー <span class="badge badge-danger">必須</span></label>
-				<div class="col-4">
-					<select class="custom-select" name="category" id="category">
-						<option value="0">選択して下さい</option>
-						<option value="1" ${param.category eq '1' ? 'selected' : data.category eq '1' ? 'selected' : ''}>食費</option>
-						<option value="2" ${param.category eq '2' ? 'selected' : data.category eq '2' ? 'selected' : ''}>日用品</option>
-						<option value="3" ${param.category eq '3' ? 'selected' : data.category eq '3' ? 'selected' : ''}>交際費</option>
-					</select>
-				</div>
-			</div>
+			<%-- categoryのinclude --%>
+			<jsp:include page="_category.jsp" />
+
 			<div class="form-group row">
 				<label for="note" class="offset-2 col-sm-2 col-form-label font-weight-bold">備考</label>
 				<div class="col-6">
