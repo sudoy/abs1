@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import abs1.beans.Abs1;
+import abs1.beans.Category;
 import utils.DBUtils;
 
 @WebServlet("/copy.html")
@@ -60,6 +61,31 @@ public class CopyServlet extends HttpServlet {
 					rs.getInt("price"));
 
 			req.setAttribute("data", t);
+
+			//カテゴリー表示
+			try{
+				DBUtils.close(ps);
+				DBUtils.close(rs);
+			}catch(Exception e){}
+
+			sql = "SELECT category_id, category_data FROM list ORDER BY category_id";
+
+			ps = con.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+
+			List<Category> categories = new ArrayList<Category>();
+
+			while(rs.next()) {
+				Category c = new Category(
+						rs.getInt("category_id"),
+						rs.getString("category_data")
+						);
+				categories.add(c);
+			}
+
+			req.setAttribute("categories", categories);
 
 			//フォワード
 			getServletContext().getRequestDispatcher("/WEB-INF/copy.jsp").forward(req, resp);

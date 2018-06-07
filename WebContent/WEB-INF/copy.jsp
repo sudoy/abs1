@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="utils.HTMLUtils"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="utils.HTMLUtils" %>
 
 <!DOCTYPE html>
 <html>
@@ -73,9 +75,15 @@
 				<div class="col-4">
 					<select class="custom-select" name="category" id="category">
 						<option value="0">選択して下さい</option>
+
+						<c:forEach var="v" items="${categories}">
+						 	<option value="${v.category_id}" ${data.category eq 'v.category_id' ? 'selected' : param.category eq 'v.category_id' ? 'selected' : ''} >${v.category_data}</option>
+						</c:forEach>
+<%--
 						<option value="1" ${data.category eq '1' ? 'selected' : param.category eq '1' ? 'selected' : ''}>食費</option>
 						<option value="2" ${data.category eq '2' ? 'selected' : param.category eq '2' ? 'selected' : ''}>日用品</option>
 						<option value="3" ${data.category eq '3' ? 'selected' : param.category eq '3' ? 'selected' : ''}>交際費</option>
+--%>
 					</select>
 				</div>
 			</div>
