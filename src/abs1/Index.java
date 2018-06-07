@@ -106,20 +106,9 @@ public class Index extends HttpServlet {
 
 				session.setAttribute("errors", errors);
 
-				if(jump.equals("1")) {
-					now = now.plusMonths(-1);
-				}else if(jump.equals("0")) {
-					now = now.plusMonths(1);
-				}
+				req.setAttribute("currentIncome", "0");
+				req.setAttribute("currentSpend", "0");
 
-				if(jumpY.equals("1")) {
-					now = now.plusYears(-1);
-				}else if(jumpY.equals("0")) {
-					now = now.plusYears(1);
-				}
-
-				resp.sendRedirect("index.html?now=" + now);
-				return;
 			}
 
 			if(rs.next()) {

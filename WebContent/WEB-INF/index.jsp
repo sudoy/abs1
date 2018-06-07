@@ -87,7 +87,7 @@
 				<div class="card bg-light border-info mb-4">
 					<div class="card-header text-center"><span class="oi oi-yen"></span> 今月の収入合計 <small class="text-muted">（先月比）</small></div>
 					<div class="card-body">
-						<p class="card-text text-center"><fmt:formatNumber value="${currentIncome}" pattern="0,000" /><small class="text-${HTMLUtils.color(compareIncome)}">（${HTMLUtils.addPlus(compareIncome)}）</small></p>
+						<p class="card-text text-center"><fmt:formatNumber value="${currentIncome}" pattern="#,##0;-#,##0" /><small class="text-${HTMLUtils.color(compareIncome)}">　(<fmt:formatNumber value="${compareIncome}" pattern="+#,##0;-#,##0" />)</small></p>
 					</div>
 				</div>
 			</div>
@@ -96,7 +96,7 @@
 				<div class="card bg-light border-dark mb-4">
 					<div class="card-header text-center"><span class="oi oi-yen"></span> 今月の支出合計 <small class="text-muted">（先月比）</small></div>
 					<div class="card-body">
-						<p class="card-text text-center"><fmt:formatNumber value="${currentSpend}" pattern="0,000" /><small class="text-${HTMLUtils.color(compareSpend)}">（${HTMLUtils.addPlus(compareSpend)}）</small></p>
+						<p class="card-text text-center"><fmt:formatNumber value="${currentSpend}" pattern="#,##0;-#,##0" /><small class="text-${HTMLUtils.color(compareSpend)}">　(<fmt:formatNumber value="${compareSpend}" pattern="+#,##0;-#,##0" />)</small></p>
 					</div>
 				</div>
 			</div>
@@ -133,7 +133,7 @@
 								<td>${HTMLUtils.dateFormat(abs1.date)}</td>
 								<td>${abs1.category}</td>
 								<td>${abs1.note}</td>
-								<td class="text-right"><fmt:formatNumber value="${abs1.price}" pattern="0,000" /></td>
+								<td class="text-right"><fmt:formatNumber value="${abs1.price}" pattern="#,##0;-#,##0" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>
