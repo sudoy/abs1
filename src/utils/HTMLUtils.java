@@ -7,13 +7,33 @@ import java.time.format.DateTimeFormatter;
 
 public class HTMLUtils {
 
-	public static String dateFormat(Date limitDate) {
+	public static String dateFormat(Date date) {
 		String s = "";
-		if(limitDate == null) {
+		if(date == null) {
 			return "";
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-		s = sdf.format(limitDate);
+		s = sdf.format(date);
+
+		return s;
+	}
+
+	public static String dateFormat(String date) {
+		String s = "";
+		if(date == null) {
+			return "";
+		}
+		s = date.replace("-", "/");
+		return s;
+	}
+
+	public static String dateFormat(LocalDate now) {
+		String s = "";
+		if(now == null) {
+			return "";
+		}
+		DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		s = now.format(sdf);
 
 		return s;
 	}

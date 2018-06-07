@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import abs1.beans.Abs1;
 import utils.DBUtils;
@@ -83,6 +84,7 @@ public class Update extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
+		HttpSession session = req.getSession();
 
 		List<String> errors = validate(req);
 		if(errors.size() != 0) {
@@ -118,6 +120,15 @@ public class Update extends HttpServlet {
 
 			//実行
 			ps.executeUpdate();
+
+
+			List<String> successes = new ArrayList<>();
+			String success = "「" + req.getParameter("date") + " "
+					+ req.getParameter("category") + " "
+					+ req.getParameter("price") + "」を更新しました。";
+			successes.add(success);
+
+			session.setAttribute("successes", successes);
 
 			//リダイレクト
 			resp.sendRedirect("index.html");

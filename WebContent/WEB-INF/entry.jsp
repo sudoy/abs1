@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="utils.HTMLUtils" %>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,19 +16,6 @@
 
 		<div class="container pt-6">
 
-		<div class="row">
-			<div class="col">
-				<div class="alert alert-success alert-dismissible fade show" role="alert">
-					<h4 class="alert-heading h5 font-weight-bold"><span class="oi oi-pin"></span> 成功しました！</h4>
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<ul>
-						<li>「2018/05/30 交際費 -6,800」を登録しました。</li>
-					</ul>
-				</div>
-			</div>
-		</div>
 
 		<%-- error文のinclude --%>
 		<jsp:include page="_errors.jsp" />
@@ -45,7 +33,7 @@
 			<div class="form-group row">
 				<label for="date" class="offset-2 col-sm-2 col-form-label font-weight-bold">日付 <span class="badge badge-danger">必須</span></label>
 				<div class="col-2">
-					<input type="text" class="form-control" name="date" id="date" placeholder="日付" aria-describedby="dateHelp" value="${param.date}">
+					<input type="text" class="form-control" name="date" id="date" placeholder="日付" aria-describedby="dateHelp" value="${param.date == null ? HTMLUtils.dateFormat(today) : HTMLUtils.dateFormat(param.date)}">
 				</div>
 				<div class="col-4">
 					<small id="dateHelp" class="text-muted align-bottom">「YYYY/MM/DD」形式で入力してください。</small>

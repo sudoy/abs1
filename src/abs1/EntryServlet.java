@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import utils.DBUtils;
 
@@ -29,6 +30,7 @@ public class EntryServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
+		HttpSession session = req.getSession();
 
 
 		List<String> errors = validate(req);
@@ -73,7 +75,13 @@ public class EntryServlet extends HttpServlet {
 				DBUtils.close(ps);
 			}catch(Exception e){}
 		}
+		List<String> successes = new ArrayList<>();
+		String success = "「" + req.getParameter("date") + " "
+				+ req.getParameter("category") + " "
+				+ req.getParameter("price") + "」を登録しました。";
+		successes.add(success);
 
+		session.setAttribute("successes", successes);
 		resp.sendRedirect("index.html");
 	}
 
@@ -85,7 +93,7 @@ public class EntryServlet extends HttpServlet {
 			//形式の判定
 			try {
 				DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-
+				df.setLenient(false);
 			    String s1 = req.getParameter("date");
 			    String s2 = df.format(df.parse(s1));
 
