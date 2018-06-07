@@ -57,11 +57,11 @@
 					<legend class="offset-2 col-form-label col-2 pt-0 font-weight-bold">区分</legend>
 					<div class="col-sm-8">
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="division1" name="division" class="custom-control-input" value="支出" ${param.division eq '支出' ? 'checked' : HTMLUtils.checkDivision(data.price) eq '支出' ? 'checked' :  '' }>
+							<input type="radio" id="division1" name="division" class="custom-control-input" value="支出" ${param.division eq '支出' ? 'checked' : data.price eq null ? '' : HTMLUtils.checkDivision(data.price) eq '支出' ? 'checked' : '' }>
 							<label class="custom-control-label" for="division1">支出</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="division2" name="division" class="custom-control-input" value="収入" ${param.division eq '収入' ? 'checked' : HTMLUtils.checkDivision(data.price) eq '収入' ? 'checked' :  '' }>
+							<input type="radio" id="division2" name="division" class="custom-control-input" value="収入" ${param.division eq '収入' ? 'checked' : data.price eq null ? '' : HTMLUtils.checkDivision(data.price) eq '収入' ? 'checked' : '' }>
 							<label class="custom-control-label" for="division2">収入</label>
 						</div>
 					</div>

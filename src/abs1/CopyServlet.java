@@ -112,7 +112,11 @@ public class CopyServlet extends HttpServlet {
 			}else {
 				ps.setString(3, req.getParameter("note"));
 			}
-			ps.setString(4, req.getParameter("price"));
+			if(req.getParameter("division").equals("支出")) {
+				ps.setString(4, "-" + req.getParameter("price"));
+			}else if(req.getParameter("division").equals("収入")){
+				ps.setString(4, req.getParameter("price"));
+			}
 
 			ps.executeUpdate();
 		}catch(Exception e){
