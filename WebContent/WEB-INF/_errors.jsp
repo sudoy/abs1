@@ -18,4 +18,5 @@
 				</div>
 			</div>
 		</div>
+		<% session.setAttribute("errors", null); %>
 	</c:if>

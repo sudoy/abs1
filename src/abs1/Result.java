@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import abs1.beans.Abs1;
 import utils.DBUtils;
@@ -23,6 +27,18 @@ public class Result extends HttpServlet {
 			throws ServletException, IOException {
 
 		req.setCharacterEncoding("utf-8");
+
+		HttpSession session = req.getSession();
+		List<String> errors = validate(req);
+		if(errors.size() != 0) {
+			session.setAttribute("errors", errors);
+
+			getServletContext().getRequestDispatcher("/WEB-INF/search.jsp")
+			.forward(req, resp);
+			return;
+
+		}
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -65,9 +81,9 @@ public class Result extends HttpServlet {
 
 			if(list.isEmpty()) {
 
-				List<String> errors = new ArrayList<>();
+				errors = new ArrayList<>();
 				errors.add("検索結果は1件もありません。");
-				req.setAttribute("errors", errors);
+				session.setAttribute("errors", errors);
 				getServletContext().getRequestDispatcher("/WEB-INF/search.jsp")
 					.forward(req, resp);
 				return;
@@ -104,4 +120,65 @@ public class Result extends HttpServlet {
 		}
 
 	}
+
+	private List<String> validate(HttpServletRequest req){
+		List<String> list = new ArrayList<>();
+		if(!req.getParameter("start").equals("")) {
+			//形式の判定
+			try {
+				DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+				df.setLenient(false);
+			    String s1 = req.getParameter("start");
+			    String s2 = df.format(df.parse(s1));
+
+			    if(s1.equals(s2)) {
+
+			    }else {
+			    	list.add("期限は「YYYY/MM/DD」形式で入力して下さい。");
+			    }
+
+			}catch(ParseException p) {
+
+				list.add("期限は「YYYY/MM/DD」形式で入力して下さい。");
+
+			}
+		}
+		if(!req.getParameter("end").equals("")) {
+			//形式の判定
+			try {
+				DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+				df.setLenient(false);
+			    String s1 = req.getParameter("end");
+			    String s2 = df.format(df.parse(s1));
+
+			    if(s1.equals(s2)) {
+
+			    }else {
+			    	list.add("期限は「YYYY/MM/DD」形式で入力して下さい。");
+			    }
+
+			}catch(ParseException p) {
+
+				list.add("期限は「YYYY/MM/DD」形式で入力して下さい。");
+
+			}
+		}
+
+		if(!req.getParameter("end").equals("") && !req.getParameter("start").equals("")) {
+			SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd");
+			fmt.setLenient(false);
+			try {
+				java.util.Date fs = fmt.parse(req.getParameter("start"));
+				java.util.Date fe = fmt.parse(req.getParameter("end"));
+				if(!fs.before(fe)) {
+					list.add("日付入力の順序が間違っています。");
+				}
+			} catch (Exception e1) {
+
+			}
+		}
+
+		return list;
+	}
+
 }
