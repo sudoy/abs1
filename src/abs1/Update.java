@@ -88,7 +88,7 @@ public class Update extends HttpServlet {
 		if(errors.size() != 0) {
 			req.setAttribute("errors", errors);
 
-			getServletContext().getRequestDispatcher("/WEB-INF/entry.jsp")
+			getServletContext().getRequestDispatcher("/WEB-INF/update.jsp")
 			.forward(req, resp);
 			return;
 		}

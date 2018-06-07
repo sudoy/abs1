@@ -13,6 +13,7 @@
 	<jsp:include page="_navbar.jsp" />
 
 
+
 	<div class="container pt-6">
 
 		<div class="row">
@@ -56,11 +57,11 @@
 					<legend class="offset-2 col-form-label col-2 pt-0 font-weight-bold">区分</legend>
 					<div class="col-sm-8">
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="division1" name="division" class="custom-control-input" checked>
+							<input type="radio" id="division1" name="division" class="custom-control-input" value="支出" ${param.division eq '支出' ? 'checked' : HTMLUtils.checkDivision(data.price) eq '支出' ? 'checked' :  '' }>
 							<label class="custom-control-label" for="division1">支出</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="division2" name="division" class="custom-control-input">
+							<input type="radio" id="division2" name="division" class="custom-control-input" value="収入" ${param.division eq '収入' ? 'checked' : HTMLUtils.checkDivision(data.price) eq '収入' ? 'checked' :  '' }>
 							<label class="custom-control-label" for="division2">収入</label>
 						</div>
 					</div>
@@ -87,7 +88,7 @@
 			<div class="form-group row">
 				<label for="amount" class="offset-2 col-sm-2 col-form-label font-weight-bold">金額 <span class="badge badge-danger">必須</span></label>
 				<div class="col-2">
-					<input type="text" class="form-control" name="price" id="amount" placeholder="金額" value="${ HTMLUtils.priceFormat(data.price)}">
+					<input type="text" class="form-control" name="price" id="amount" placeholder="金額" value="${param.price != null ? param.price : HTMLUtils.priceFormat(data.price)}">
 				</div>
 			</div>
 

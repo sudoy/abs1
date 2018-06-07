@@ -18,6 +18,13 @@ VALUES('2018-05-30', 4, '', 120000);
 INSERT INTO abs1(date, category, note, price)
 VALUES('2018-05-30', 5, 'ラッキー', 3000);
 
+INSERT INTO abs1(date, category, note ,price)
+VALUES('2018-06-1', 1, '', 3000);
+INSERT INTO abs1(date, category, note ,price)
+VALUES('2018-06-1', 2, '', 5000);
+INSERT INTO abs1(date, category, note ,price)
+VALUES('2018-06-2', 3, 'テスト', 3000);
+
 
 CREATE TABLE list(
 	category_id INT PRIMARY KEY AUTO_INCREMENT,
