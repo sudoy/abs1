@@ -15,6 +15,7 @@ public class Search extends HttpServlet {
 			throws ServletException, IOException {
 
 
+		req.setAttribute("divisions", "on");
 
 		//フォワード
 		getServletContext().getRequestDispatcher("/WEB-INF/search.jsp").forward(req, resp);

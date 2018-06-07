@@ -50,7 +50,7 @@
 					<legend class="offset-1 col-form-label col-2 pt-0 font-weight-bold">カテゴリー</legend>
 					<div class="col-sm-8">
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="category-all" name="all" class="custom-control-input category-all" ${param.all eq null ? 'checked' : param.eat eq '食費' && param.life eq '日用品' && param.money eq '交際費' ? 'checked' : ''}>
+							<input type="checkbox" id="category-all" name="all" class="custom-control-input category-all" ${errors == null ? 'checked' : param.eat eq '食費' && param.life eq '日用品' && param.money eq '交際費' ? 'checked' : ''}>
 							<label class="custom-control-label" for="category-all">全て</label>
 						</div>
 					</div>
@@ -58,15 +58,15 @@
 
 					<div class="offset-3 col-sm-8">
 						<div class="custom-control custom-checkbox custom-control-inline">
- 							<input type="checkbox" id="category1" name="eat" class="custom-control-input category" value="食費" ${param.eat eq null ? 'checked' : param.eat eq '食費' ? 'checked' : '' }>
+ 							<input type="checkbox" id="category1" name="eat" class="custom-control-input category" value="食費" ${errors == null ? 'checked' : param.eat eq '食費' ? 'checked' : '' }>
 							<label class="custom-control-label"  for="category1">食費</label>
 						</div>
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="category2" name="life" class="custom-control-input category" value="日用品" ${param.life eq null ? 'checked' : param.life eq '日用品' ? 'checked' : '' }>
+							<input type="checkbox" id="category2" name="life" class="custom-control-input category" value="日用品" ${errors == null ? 'checked' : param.life eq '日用品' ? 'checked' : '' }>
 							<label class="custom-control-label"  for="category2">日用品</label>
 						</div>
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="category3" name="money" class="custom-control-input category" value="交際費" ${param.money eq null ? 'checked' : param.money eq '交際費' ? 'checked' : '' }>
+							<input type="checkbox" id="category3" name="money" class="custom-control-input category" value="交際費" ${errors == null ? 'checked' : param.money eq '交際費' ? 'checked' : '' }>
 							<label class="custom-control-label"  for="category3">交際費</label>
 						</div>
 					</div>
