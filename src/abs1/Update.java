@@ -137,8 +137,10 @@ public class Update extends HttpServlet {
 
 			session.setAttribute("successes", successes);
 
+			String s = req.getParameter("date").replace("/", "-");
+
 			//リダイレクト
-			resp.sendRedirect("index.html?now=" + ServletUtils.stringParse(req.getParameter("date")));
+			resp.sendRedirect("index.html?now=" + ServletUtils.stringParse(s));
 
 
 		}catch(Exception e){
