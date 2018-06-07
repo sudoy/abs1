@@ -60,6 +60,29 @@
 			<jsp:include page="_category.jsp" />
 
 			<div class="form-group row">
+				<div class="offset-4 col-8">
+					<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="panel-title">
+							<a data-toggle="collapse" href="#collapse1">カテゴリーの追加・削除・編集</a>
+						</div>
+					</div>
+					<div id="collapse1" class="panel-collapse collapse">
+						<div class="panel-body">
+							<ul>
+								<li><a href="#">追加</a></li>
+								<li><a href="#">削除</a></li>
+								<li><a href="#">編集</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+				</div>
+			</div>
+
+			<div class="form-group row">
 				<label for="note" class="offset-2 col-sm-2 col-form-label font-weight-bold">備考</label>
 				<div class="col-6">
 					<textarea class="form-control" name="note" id="note" placeholder="備考" rows="3">${param.note}</textarea>

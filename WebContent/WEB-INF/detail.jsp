@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="utils.HTMLUtils"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -16,8 +18,6 @@
 
 		<%-- error文のinclude --%>
 		<jsp:include page="_errors.jsp" />
-
-
 
 		<div class="row justify-content-between">
 			<div class="offset-1 col">
@@ -55,14 +55,15 @@
 			</fieldset>
 
 			<div class="form-group row">
-				<label for="category" class="offset-2 col-sm-2 col-form-label font-weight-bold">カテゴリー</label>
+				<label for="category" class="offset-2 col-sm-2 col-form-label font-weight-bold">カテゴリー <span class="badge badge-danger">必須</span></label>
 				<div class="col-4">
 					<select class="custom-select" name="category" id="category" disabled>
-						<option>選択して下さい</option>
+						<c:forEach var="v" items="${categories}">
+							<c:if test="${data.category eq v.category_id || param.category eq v.category_id}">
+								<option value="${v.category_id}">${v.category_data}</option>
+							</c:if>
+						</c:forEach>
 
-						<option ${data.category eq '1' ? 'selected' : ''}>食費</option>
-						<option ${data.category eq '2' ? 'selected' : ''}>日用品</option>
-						<option ${data.category eq '3' ? 'selected' : ''}>交際費</option>
 					</select>
 				</div>
 			</div>
