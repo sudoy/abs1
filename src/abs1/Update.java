@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import abs1.beans.Abs1;
 import utils.DBUtils;
+import utils.ServletUtils;
 
 @WebServlet("/update.html")
 public class Update extends HttpServlet {
@@ -124,8 +125,8 @@ public class Update extends HttpServlet {
 
 			List<String> successes = new ArrayList<>();
 			String success = "「" + req.getParameter("date") + " "
-					+ req.getParameter("category") + " "
-					+ req.getParameter("price") + "」を更新しました。";
+					+ ServletUtils.categoryCatch(req) + " "
+					+ req.getParameter("price") + "円」に更新しました。";
 			successes.add(success);
 
 			session.setAttribute("successes", successes);

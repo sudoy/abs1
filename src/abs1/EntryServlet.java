@@ -79,7 +79,7 @@ public class EntryServlet extends HttpServlet {
 		List<String> successes = new ArrayList<>();
 		String success = "「" + req.getParameter("date") + " "
 				+ ServletUtils.categoryCatch(req) + " "
-				+ req.getParameter("price") + "」を登録しました。";
+				+ req.getParameter("price") + "円」を登録しました。";
 		successes.add(success);
 
 		session.setAttribute("successes", successes);

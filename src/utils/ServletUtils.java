@@ -27,7 +27,7 @@ public class ServletUtils {
 		try {
 			con = DBUtils.getConnection();
 
-			sql = "select category, category_name from abs1 join list on category = category_id order where category = ?  by category";
+			sql = "select category, category_data from abs1 join list on category = category_id  where category = ? order by category";
 
 			ps = con.prepareStatement(sql);
 
@@ -37,7 +37,7 @@ public class ServletUtils {
 
 			rs.next();
 
-			name = rs.getString("category_name");
+			name = rs.getString("category_data");
 
 		} catch (Exception e) {
 			e.printStackTrace();
