@@ -115,6 +115,9 @@ public class Index extends HttpServlet {
 			if(rs.next()) {
 				currentSpend = rs.getInt("price");
 				req.setAttribute("currentSpend", currentSpend);
+			}else {
+				currentSpend = 0;
+				req.setAttribute("currentSpend", currentSpend);
 			}
 
 			try{
