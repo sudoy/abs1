@@ -56,11 +56,11 @@
 					<legend class="offset-2 col-form-label col-2 pt-0 font-weight-bold">区分</legend>
 					<div class="col-sm-8">
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="division1" name="division" class="custom-control-input" value="支出" ${param.division eq '支出' ? 'checked' : ''} >
+							<input type="radio" id="division1" name="division" class="custom-control-input" value="支出" ${param.division eq '支出' ? 'checked' : data.price eq null ? '' : HTMLUtils.checkDivision(data.price) eq '支出' ? 'checked' : '' } >
 							<label class="custom-control-label" for="division1">支出</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="division2" name="division" class="custom-control-input" value="収入" ${param.division eq '収入' ? 'checked' : ''}>
+							<input type="radio" id="division2" name="division" class="custom-control-input" value="収入" ${param.division eq '収入' ? 'checked' : data.price eq null ? '' : HTMLUtils.checkDivision(data.price) eq '収入' ? 'checked' : '' }>
 							<label class="custom-control-label" for="division2">収入</label>
 						</div>
 					</div>
@@ -72,9 +72,9 @@
 				<div class="col-4">
 					<select class="custom-select" name="category" id="category">
 						<option value="0">選択して下さい</option>
-						<option value="1" ${data.category eq '1' ? 'selected' : ''}>食費</option>
-						<option value="2" ${data.category eq '2' ? 'selected' : ''}>日用品</option>
-						<option value="3" ${data.category eq '3' ? 'selected' : ''}>交際費</option>
+						<option value="1" ${param.category eq '1' ? 'selected' : data.category eq '1' ? 'selected' : ''}>食費</option>
+						<option value="2" ${param.category eq '2' ? 'selected' : data.category eq '2' ? 'selected' : ''}>日用品</option>
+						<option value="3" ${param.category eq '3' ? 'selected' : data.category eq '3' ? 'selected' : ''}>交際費</option>
 					</select>
 				</div>
 			</div>
@@ -93,7 +93,7 @@
 
 			<div class="form-group row">
 				<div class="offset-4 col-8">
-					<a href="detail.html?id=${data.id }" class="btn btn-secondary">キャンセル</a>
+					<a href="detail.html?id=${param.id }" class="btn btn-secondary">キャンセル</a>
 					<button type="submit" class="btn btn-primary"><span class="oi oi-check"></span> 修正OK</button>
 				</div>
 			</div>

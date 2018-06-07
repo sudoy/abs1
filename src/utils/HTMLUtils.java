@@ -49,8 +49,10 @@ public class HTMLUtils {
 		String s = "";
 		if(price < 0) {
 			s = "支出";
-		}else {
+		}else if(0 <= price) {
 			s = "収入";
+		}else {
+			s = "未判定";
 		}
 
 		return s;
